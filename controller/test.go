@@ -9,6 +9,7 @@ import (
 )
 
 func HomeController(c *gin.Context) {
+
 	people := service.GetUser()
 	c.JSON(http.StatusOK, people)
 	config.Log.Error("hello")
