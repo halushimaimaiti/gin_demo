@@ -21,9 +21,10 @@ func main() {
 	router.Use(cors.New(corsConfig))
 	middleware.InitMiddleWare(router)
 	routers.SetupRoutes(router)
-	config.InitMysql()
-	config.InitRedis()
+	config.InitSqlLite3()
+	// config.InitMysql()
+	// config.InitRedis()
 	config.InitLog()
-	models.InitDataBase()
+	models.InitDataBase() //表迁移
 	router.Run(":8000")
 }

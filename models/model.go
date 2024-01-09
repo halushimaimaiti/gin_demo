@@ -2,17 +2,19 @@ package models
 
 import (
 	"gin_test/config"
-
-	"gorm.io/gorm"
 )
 
-type User struct {
-	gorm.Model
-	Id    uint
-	Name  string
-	Email string
+type Book struct {
+	Id   uint
+	Name string `gorm:"not null"`
+}
+
+type BookInfo struct {
+	Id     uint
+	BookId uint `gorm:"not null"`
+	Info   string
 }
 
 func InitDataBase() {
-	config.Db.AutoMigrate(&User{})
+	config.SqlLiteDB.AutoMigrate(&Book{}, &BookInfo{})
 }

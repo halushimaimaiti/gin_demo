@@ -5,3 +5,9 @@ type User struct {
 	Name  string `json:"name"`
 	Email string `json:"email"`
 }
+
+type BookInfo struct {
+	No       uint32 `json:"No"`
+	BookName string `json:"BookName"`
+	Info     string `json:"Info"`
+}

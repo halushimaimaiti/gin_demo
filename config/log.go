@@ -1,7 +1,9 @@
 package config
 
 import (
+	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/sirupsen/logrus"
 	"gopkg.in/natefinch/lumberjack.v2"
@@ -15,17 +17,21 @@ func InitLog() {
 	// 设置 logrus 日志级别
 	Log.SetLevel(logrus.InfoLevel)
 
+	dir, err := os.Getwd()
+	if err != nil {
+		log.Fatal(err)
+	}
 	// 创建日志分割器 Lumberjack
 	infoLog := &lumberjack.Logger{
-		Filename:   "D:/gin_test/logs/info.log", // Info 级别日志文件
-		MaxSize:    100,                         // 单个日志文件最大大小，单位 MB
-		MaxBackups: 3,                           // 最大保留的日志文件数
-		MaxAge:     30,                          // 保留日志的最大天数
-		Compress:   true,                        // 是否压缩日志
+		Filename:   filepath.Join(dir, "logs", "info.log"), // Info 级别日志文件
+		MaxSize:    100,                                    // 单个日志文件最大大小，单位 MB
+		MaxBackups: 3,                                      // 最大保留的日志文件数
+		MaxAge:     30,                                     // 保留日志的最大天数
+		Compress:   true,                                   // 是否压缩日志
 	}
 
 	errorLog := &lumberjack.Logger{
-		Filename:   "D:/gin_test/logs/error.log", // Error 级别日志文件
+		Filename:   filepath.Join(dir, "logs", "error.log"), // Error 级别日志文件
 		MaxSize:    100,
 		MaxBackups: 3,
 		MaxAge:     30,
